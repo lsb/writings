@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <style>
+      body {font:12pt Georgia;width:35em;margin:auto;color:#333}
+      code,pre,.black {color:#000}
+      .red {color:#F00}
+      .escape {opacity:0.5}
+      i, i code {color:#C66}
+      .nowrap {white-space:nowrap}
+      .beta,.maybe {font-size:80%;font-style:italic;opacity:0.6}
+      a:link,a:visited {color:#00F}
+      h2 {font-style:italic}
+      .hide {visibility:hidden}
+      .show {visibility:visible}
+      hr { border-width: 1px 0px 0px 0px; border-style: solid; color: #999 }
+    </style>
+    <title>ASK&ndash;HUMAN. A little api to ask for a little help.</title>
+  </head>
+  <body>
+    <h1>ASK&ndash;HUMAN.</h1>
+    <h2>A little api to ask for a little help.</h2>
+    <p class=beta>Reference endpoint is in private &beta;; <a href="mailto:hi@leebutterman.com">email me</a> if you want in early.</p>
+    <p class=black><a href="#endpoints">Endpoints</a>&mdash;<a href="#required">Minimal parameters + example</a>&mdash;<a href="#optional">Optional parameters</a>&mdash;<a href="#batching">Batching</a>&mdash;<a href="#responses">Response codes</a>&mdash;<a href="#turnaround">Turnaround</a></p>
+
+    <h3><a id=endpoints>Endpoints.</a></h3>
+    <p>
+      <code>PUT /ask</code> poses a question.<br>
+      <code>GET /ask</code> queries for a response.<br>
+      Both take the same parameters.
+    </p>
+
+    <h3><a id=minimal>Minimal parameters + example.</a></h3>
+    <p>
+      <code>instructions</code>: <i>text</i><br>
+      <code>question</code>: &nbsp;<br>
+      &nbsp; <code>{Radio: {questionText</code>: <i>text</i>, <code>chooseOne</code>: <i>[text]</i><code>}}</code><br>
+      &nbsp; <span class=maybe>or</span><br>
+      &nbsp; <code>{Text: {questionText</code>: <i>text</i>, <code>defaultText</code>: <i>text</i><code>}}</code><br>
+      &nbsp; <span class=maybe>via JSON encoding</span><br>
+    </p>
+
+    <p>
+      <code>PUT /v1/ask?instructions=Math&amp;question=<wbr>%7B%22Radio%22%3A%7B%22questionText%22%3A<wbr>%221%2B1%3D%22%2C%22chooseOne%22%3A<wbr>%5B%222%22%2C%22%3F%22%5D%7D%7D</code><br>
+      <code>&middot;&middot;&middot;</code> &nbsp;  <span class=maybe>question={"Radio":{"questionText":"1+1=","chooseOne":["2","?"]}}</span><br>
+      <code>GET /v1/ask?instructions=Math&amp;question=<wbr>%7B%22Radio%22%3A%7B%22questionText%22%3A<wbr>%221%2B1%3D%22%2C%22chooseOne%22%3A<wbr>%5B%222%22%2C%22%3F%22%5D%7D%7D</code><br>
+      &raquo; <code>[{"Pass": {"value": "2"}}]</code> <span class=maybe>(hopefully)</span><br><br>
+    </p>
+
+    <h3><a id=total>Complete parameters.</a></h3>
+    <p>
+      <code>instructions:</code> <i>escaped-text</i><br>
+      <code>question:</code> <i>question</i><br>
+      <code>distinctUsers:</code> <i>{0..25}</i><br>
+      <code>addMinutes:</code> <i>{0..99}</i><br>
+      <code>cost:</code> <i>{1..99}</i><br>
+      <code>knownAnswerQuestions:</code> <i>knownAnswerQuestions</i><br>
+      <code>uniqueAskId:</code> <i>arbitrary binary data</i><br>
+
+      <hr>
+      <i>question</i>:<br>
+      &nbsp; <code>{Radio: {questionText</code>: <i>escaped-text</i>,</code><br>
+      &nbsp; <code> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;chooseOne</code>: <i>[escaped-text]</i><code>}}</code><br>
+      &nbsp; <span class=maybe>or</span><br>
+      &nbsp; <code>{Text: {questionText</code>: <i>escaped-text</i>,<br>
+      &nbsp; <code> &nbsp; &nbsp; &nbsp; &nbsp; defaultText</code>: <i>text</i><code>}}</code><br>
+      &nbsp; <span class=maybe>or</span><br>
+      &nbsp; <code>{ConstrainedText: {questionText</code>: <i>escaped-text</i>,<br>
+      &nbsp; <code> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;defaultText</code>: <i>text</i>,<br>
+      &nbsp; <code> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;regex</code>: case-insensitive <i>posix regex</i><code>}}</code><br>
+
+      <hr>
+      <i>knownAnswerQuestions</i>:<br>
+      &nbsp; <code>{answeredQuestions:</code> <i>[answeredQuestion]</i>,<br>
+      &nbsp; <code>&nbsp;percentCorrect:</code> <i>{0..100}</i><code>}</code><br>
+      <hr>
+      <i>answeredQuestion</i>:<br>
+      &nbsp; <code>{question:</code> <i>question</i>,<br>
+      &nbsp; <code>&nbsp;match:</code> <i>match</i> on <i>text</i> or <i>escaped-text</i> of answer<code>}</code><br>
+      <hr>
+      <i>match</i>:<br>
+      &nbsp; <code>{Exact:</code> <i>string</i><code>}</code><br>
+      &nbsp; <span class=maybe>or</span><br>
+      &nbsp; <code>{Inexact</code>: case-insensitive <i>posix regex</i><code>}</code><br>
+      <hr>
+      <i>escaped-text</i>:<br>
+      &nbsp; <i>escaped-text-symbol</i><br>
+      &nbsp; <span class=maybe>or</span><br>
+      &nbsp; <i>escaped-text-symbol escaped-text</i><br>
+      <hr>
+      <i>escaped-text-symbol</i><br>
+      &nbsp; <code>\image\</code><i>url</i><code>\</code><br>
+      &nbsp; <span class=maybe>or</span><br>
+      &nbsp; <i>letter</i><br>
+    </p>
+
+    <h3><a id=batching>Batching.</a></h3>
+    <p>Note that <code>distinctUsers</code> is not guaranteed to be the number of answered returned. To improve worker concentration and reduce cost, human responses are requested in batches of questions. There is one <code>uniqueAskID</code> of a question in a batch, and all questions in a batch must have the same <code>instructions</code>, <code>distinctUsers</code>, <code>addMinutes</code>, <code>cost</code>, and <code>knownAnswerQuestions</code>. When under <code>percentCorrect</code>% of <code>knownAnswerQuestions</code> are answered correctly in a batch, the answers in the batch are discarded. The batch is asked again until <code>distinctUsers</code> different users have completed the batch either satisfactorily or unsatisfactorily, at which point all answers for each question in the batch in a satisfactory completion are declared final.</p>
+
+    <h3><a id=responses>Response codes.</a></h3>
+    <p>
+      <code>PUT</code> response: <code>200</code>.<br>
+      <code>GET</code> response: <code>200</code> when complete, returning a list of answers.<br>
+      <code>GET</code> response: <code>404</code> when incomplete.<br>
+      <code>GET</code> response: <code>412</code> before being PUT.<br>
+      <br>
+      If the parameters are not as specified above: <code>400</code> Bad Request.
+    </p>
+
+    <h3><a id=turnaround>Turnaround.</a></h3>
+    <p>An instance of a question gets posed within a few minutes of being PUT, and humans start answering questions almost immediately.</p>
+    <hr>
+    <p>
+      <a href="mailto:hi@leebutterman.com">Please let me know how this sounds.</a>
+      <br><br>
+      &mdash;<a href="http://www.leebutterman.com">Lee Butterman</a>, SF, 2013.
+    </p>
+  </body>
+</html>

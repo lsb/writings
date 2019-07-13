@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8"><style>body{font:12pt Georgia;width:30em;margin:auto;color:#333333}code,pre{color:#000}.red{color:#F00}.beta{font-size:80%;font-style:italic;opacity:0.5}a:link,a:visited{color:#00F}h2{font-style:italic}</style><title>ASK-HUMAN. A little api to ask for a little help.</title></head>
+<body>
+<h1>ASK&ndash;HUMAN.</h1><h2>A little api to ask for a little help.</h2><p class=beta>Reference endpoint is in private &beta;; <a href="mailto:hi@leebutterman.com">email me</a> if you want in early.</p><p><a href="#endpoints">Endpoints</a>&mdash;<a href="#required">Required parameters</a>&mdash;<a href="#minimal">Minimal example</a>&mdash;<a href="#optional">Optional parameters</a>&mdash;<a href="#datatypes">I/O data types</a>&mdash;<a href="#turnaround">Turnaround</a></p>
+<h3><a id=endpoints>Endpoints.</a></h3><p><code>PUT /ask</code> poses a question.<br><code>GET /ask</code> queries for a response.<br>Both take the same parameters.</p>
+<h3><a id=required>Required parameters.</a></h3><p><code>instructions</code> to preface one or more questions<br><code>type</code> data type of question; currently <code>radio</code> or <code>text</code><br><code>question</code> question object</p>
+<h3><a id=minimal>Minimal example.</a></h3><p>
+<code>PUT /ask?instructions=Please+do+arithmetic&amp;</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type=text&amp;</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;question=1+plus+1+is</code><code class=red>%1F</code><br>
+<code>&middot;&middot;&middot;</code><br>
+<code>GET /ask?instructions=Please+do+arithmetic&amp;</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type=text&amp;</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;question=1+plus+1+is</code><code class=red>%1F</code><br>
+=&gt; 2<br><br>
+<code>PUT /ask?instructions=Please+do+arithmetic&amp;</code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type=radio&amp;</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;question=1+plus+1+is</code><code class=red>%1F</code><code>2</code><code class=red>%1F</code><code>undefined</code><br>
+<code>&middot;&middot;&middot;</code><br>
+<code>GET /ask?instructions=Please+do+arithmetic&amp;</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type=radio&amp;</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;question=1+plus+1+is</code><code class=red>%1F</code><code>2</code><code class=red>%1F</code><code>undefined</code><br>
+=&gt; 2
+</p>
+<h3><a id=optional>Optional parameters.</a></h3><p><code>version</code> identifies a unique instance of a question, default ""<br><code>answer_count</code> maximum number of answers, each from a different worker, default 1<br><code>known_answer_questions</code> list of questions to put alongside for checking work, default []<br><code>acceptable_known_answer_failure_rate</code> maximum percentage, default 50<br></p><p>When one worker gets too many known answers wrong while answering a question, that question&rsquo;s answer is rejected, and different workers get the same question, until the question has <code>answer_count</code> total accepted answers (which is success), or <code>answer_count</code> total rejected answers (which is when the question is declared finished, and its answers are whichever accompanied successful known answer questions).
+</p>
+<h3><a id=datatypes>I/O data types.</a></h3><p>All strings are UTF-8.</p><p><code>radio</code> question:<br>[question, answer1, answer2&hellip;]</p><p><code>radio</code> known answer question:<br>[question, correct answer, answer1, answer2&hellip;]</p><p><code>text</code> question:<br>[question, default textbox text]</p><p><code>text</code> known answer question:<br>[question, default textbox text, correct text]</p><p><code>radio</code> answer: answer<i>n</i> text, <i>n</i>&geq;1</p><p><code>text</code> answer: typed text</p><p>ASCII unit separator <code>%1F</code> separates strings in a list.<br>ASCII record separator <code>%1E</code> separates lists in a list.<br>[[1,2],[3,4]] &rarr; <code>1<span class=red>%1F</span>2<span class=red>%1E</span>3<span class=red>%1F</span>4</code>.</p><p><code>PUT</code> response: <code>200</code>.<br><code>GET</code> response: <code>200</code> when complete, returning a list of answers.<br><code>GET</code> response: <code>404</code> when uncomplete.<br><code>GET</code> response: <code>412</code> before being PUT.</p>
+<h3><a id=turnaround>Turnaround.</a></h3><p>An instance of a question gets posed within a few minutes of being PUT, and humans start answering questions almost immediately.</p><hr>
+<p><a href="mailto:hi@leebutterman.com">Please let me know how this sounds.</a><br><br>&mdash;<a href="http://www.leebutterman.com">Lee Butterman</a>, SF, 2013.</p></body></html>
