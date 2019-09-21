@@ -1,0 +1,11 @@
+poetaexmachina.net, *.poetaexmachina.net, poetaexmachina.com, *.poetaexmachina.com {
+    proxy / localhost:3000
+}
+
+leebutterman.com, *.leebutterman.com {
+    root /home/ubuntu/leebutterman.com/_site/
+}
+
+vivam.us {
+    root /home/ubuntu/vivam.us/
+}
