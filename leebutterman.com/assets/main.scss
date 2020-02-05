@@ -88,3 +88,40 @@ $on-laptop:        800px !default;
 //}
 
 h1,h2,h3 { font-family: 'Roboto Thin'; }
+
+// thank you rowan merewood for naughty-no-alt.glitch.me via https://twitter.com/rowan_m/status/1223935532763361281
+img:not([alt]) {
+  border: 2px solid red;
+  animation: pulse 1.2s ease infinite;
+}
+
+img[alt=""] {
+  border: 2px solid red;
+  animation: pulse 1.2s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  25% {
+    transform: scale(1.3) rotate(15deg);
+    filter: blur(2px);
+    opacity: 0.8;
+    box-shadow: 0 0 2vw 2vw red;
+  }
+  50% {
+    transform: scale(1) rotate(0);
+    filter: none;
+  }
+  75% {
+    transform: scale(1.3) rotate(-15deg);
+    filter: blur(5px);
+    opacity: 0.8;
+    box-shadow: 0 0 2vw 2vw red;
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}

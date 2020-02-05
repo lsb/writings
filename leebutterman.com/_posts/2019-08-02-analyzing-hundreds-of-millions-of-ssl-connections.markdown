@@ -147,7 +147,7 @@ Currently, [TLS 1.0](https://tls-v1-0.badssl.com:1010/) is still allowed in Chro
 
 But best practices do not forbid _alternative practices!_
 
-![](/assets/bristlecone.jpg)
+![bristlecone pines from wikipedia, probably older than julius caesar himself](/assets/bristlecone.jpg)
 Certs are in the wild with millenium-scale lifetimes, like these bristlecone pines.
 <br><sup>(Rick Goldwaser from Flagstaff, AZ, USA [<a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>], <a href="https://commons.wikimedia.org/wiki/File:Gnarly_Bristlecone_Pine.jpg">via Wikimedia Commons</a>)</sup>
 

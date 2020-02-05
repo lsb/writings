@@ -58,13 +58,13 @@ R2.
       from revisions
       group by year, is_registered;
 
-![](/assets/2011-www-anonymity-reversion-totals.gif)
+![graph as explained below](/assets/2011-www-anonymity-reversion-totals.gif)
 
 Look at the ratio of good contributions to bad contributions. At the beginning, it's all groundwork that stays. 2005 is the year at which anonymous contributions start to be more bad than good, and 2007 is the year at which registered contributions spike in badness. Let's get a time series of good-to-bad content ratio for registered users, good-to-bad content ratio for anonymous users, registration-to-anonymous ratio for good contributions, and registration-to-anonymous ratio for bad contributions.
 
 R3.
 
-![](/assets/2011-www-anonymity-reversions.gif)
+![graph as explained below](/assets/2011-www-anonymity-reversions.gif)
 
 And here, it is apparent. Registered users dipped to contributing as much vandalism as content in 2007, and have taken an upswing to over three times as much good content. Anonymous users dipped to contributing as much vandalism as content in 2005, and through 2010 are contributing roughly twice as much vandalism as content (2011 only goes up to week 11). The total good content has been coming much more from registered users, outpacing anonymous users' contributions 4 to 1, and keeps growing. The total bad content has been coming slightly more from anonymous users than registered users.
 
@@ -104,7 +104,7 @@ R5.
       left join got_reverted using (user_id)
       group by year, pure, is_registered;
 
-![](/assets/2011-www-impurity-anonymity-reversions.gif)
+![graph as explained below](/assets/2011-www-impurity-anonymity-reversions.gif)
 
 Impure registered users have been adding three times as much content as vandalism. Impure anonymous users have been adding a tenth as much content as vandalism.
 
@@ -139,7 +139,7 @@ The more you edit Wikipedia, the more your edits are valuable to Wikipedia. Ther
 
 R7.
 
-![](/assets/2011-www-edit-amount-anonymity-reversion-amounts.gif)
+![graph as explained below](/assets/2011-www-edit-amount-anonymity-reversion-amounts.gif)
 
 There it is, the green line of anonymous Good Samaritans, plunging below the 1-good-to-1-bad line in 2006. I'd guess that the study was done on 2005 data, for which that held true; presumably some of the anonymous Good Samaritans created accounts, and lots of the vandalism swamped their good intentions over the second half of the last decade.
 
@@ -166,13 +166,13 @@ R8.
 
 So, first we'll look at the yearly average diff sizes, for registered and anonymous users, and for good and bad contrib, and then we'll compare those segmented diff sizes against the year's average diff size. Next, the same for page sizes that registered/anonymous users gave good and bad contributions to.
 
-![](/assets/2011-www-average-diff-size-anonymity-reversions.gif)
+![graph as explained below](/assets/2011-www-average-diff-size-anonymity-reversions.gif)
 
-![](/assets/2011-www-average-diff-size-ratio-anonymity-reversions.gif)
+![graph as explained below](/assets/2011-www-average-diff-size-ratio-anonymity-reversions.gif)
 
-![](/assets/2011-www-average-page-size-anonymity-reversions.gif)
+![graph as explained below](/assets/2011-www-average-page-size-anonymity-reversions.gif)
 
-![](/assets/2011-www-average-page-size-ratio-anonymity-reversions.gif)
+![graph as explained below](/assets/2011-www-average-page-size-ratio-anonymity-reversions.gif)
 
 Registered contributors' contributions get reverted more on larger pages, whereas anonymous contributors' contributions get reverted more on smaller pages. While the average page size is going up, the average size where one can make a productive contribution is rising more slowly. Anonymous users who make small contributions fare better on larger pages than registered users. Interestingly, registered users' bad contributions are significantly greater, information-theoretically, than registered users' good contributions, and anonymous users' good contributions are slightly greater than anonymous users' bad contributions. These numbers have stayed relatively constant over time, suggesting it might be possible to classify revisions as vandalism partly by the information-theoretic content.
 
@@ -193,9 +193,9 @@ R9.
       where not is_registered
       order by goods desc limit 1000;
 
-![](/assets/2011-www-top-25-contributors-contributions.gif)
+![graph as explained below](/assets/2011-www-top-25-contributors-contributions.gif)
 
-![](/assets/2011-www-top-1000-contributors-contributions.gif)
+![graph as explained below](/assets/2011-www-top-1000-contributors-contributions.gif)
 
 The top registered editors give much more good content than the top anonymous editors. Who are these fantastically productive registered users? Those people have contributed enormous amounts, they must work like machines!
 

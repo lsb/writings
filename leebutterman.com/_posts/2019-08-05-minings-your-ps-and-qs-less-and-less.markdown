@@ -26,7 +26,7 @@ Taking pairwise GCDs in a dataset of a million or so is expensive enough to be d
 
 The GCD tree, as described by Heininger, works roughly as follows:
 
-![](/assets/computing-all-pairs-gcds-efficiently.png)
+![n1 times n2, n3 times n4, times each other, mod each half product squared, mod each half product squared (each n squared), divided by n, gcd n, from heininger](/assets/computing-all-pairs-gcds-efficiently.png)
 
 There are many ways to implement this. Based on [existing language runtime defaults for integer arithmetic](http://www.wilfred.me.uk/blog/2014/10/20/the-fastest-bigint-in-the-west/), Gnu MP is by default in Haskell/Julia/Ruby/Guile/Racket.
 One [implementation of batch GCDs in Ruby](https://github.com/lsb/mining-your-ps-and-qs) performs well (as the product starts getting over 1MB in length, the math library time starts representing the vast majority of the runtime, so [make sure you're using GMP](https://github.com/docker-library/ruby/pull/266),
