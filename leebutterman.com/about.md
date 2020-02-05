@@ -14,6 +14,6 @@ I've also made:
 
 [Passphrase-Safety](/passphrase-safety): interactive visualization of the entropy of a passphrase, using Golomb-compressed sequences for probabilistic set membership purely client side.
 
-—Lee Butterman, Oakland, California, 2019.
+—Lee Butterman, Oakland, California, 2020. 🏳️‍🌈
 
 ![Picture of Lee Butterman at one of N Holt's Sun Tunnels in Lucin Utah in 2017](/assets/lsb-2017-suntunnels.jpg)
