@@ -29,9 +29,9 @@ theme: minima
 #theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
-  - jekyll-gzip
+  - jekyll-brotli
 
-gzip:
+brotli:
   extensions:
     - '.html'
     - '.css'
@@ -42,6 +42,8 @@ gzip:
     - '.svg'
     - '.json'
     - '.arrow'
+    - '.wasm'
+    - '.db'
 
 sass:
   style: compressed
