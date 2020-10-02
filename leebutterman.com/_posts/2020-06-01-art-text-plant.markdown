@@ -22,8 +22,8 @@ title: Image classification via transfer learning—fast.ai lesson 1 and 2
 * The motivating example in the notebook (the OxfordIIIT Pet Dataset) comes from a paper with 60% accuracy, and we can get more than 4x better in 8 years, with almost all the code wrapped up in libraries
 
 * Widgets for data cleaning seems _super useful_ (I know I have built simulacra of this many times before)
-* nice to see some kinds of inference use CPUs as sufficient (but GPUs go much faster)
-* the Jupyter animation (with the y=ax+b stochastic gradient descent) seems v useful
+* nice to see CPUs sufficient for some kinds of inference (but GPUs much faster)
+* the Jupyter animation (the y=ax+b stochastic gradient descent) seems useful!
 * running hopskotch through cells in a notebook is extremely big Alan Perlis SICP preface energy
 
 > This book is dedicated, in respect and admiration, to the spirit that lives in the computer.
