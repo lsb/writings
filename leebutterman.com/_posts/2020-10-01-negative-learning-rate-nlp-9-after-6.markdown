@@ -28,7 +28,9 @@ We can use an off-the-shelf AWD-LSTM, pretrained on WikiText-103, and train a fi
 
 Because we have so few different words in our training dataset (40 tokens, specifically), we can visualize the probabilities of what token comes after _sixty_ and _fifty_ as greyscale brightness, where darkness is higher probability, and visually inspect the brightness of a column of interest. We can record the probabilities of each of our forty tokens after each training epoch in the horizontal direction, stack them one after the other in the vertical direction, and jiggle the gamma correction in an animation to highlight differences between low-probability tokens and very-low-probability tokens (any token with lower than 1/256 probability would get blown out to white with no gamma correction). This ends up looking like the following two images, as from above:
 
-_sixty_<br>![this is an image that is being explained](/assets/after-sixty.gif)<hr>![this is an image that is being explained](/assets/after-fifty.gif)<br>_fifty_
+_sixty_<br>![this is an image that is being explained](/assets/after-sixty.gif)
+
+![this is an image that is being explained](/assets/after-fifty.gif)<br>_fifty_
 
 The top row is where the model starts, highly favoring the "beginning of stream" character, and mostly a wash everywhere else, as an untrained model.
 
