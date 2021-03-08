@@ -1,4 +1,4 @@
-FROM ruby:alpine
+FROM ruby:2.5-alpine
 RUN apk add --no-cache build-base nodejs git && gem install bundler
 WORKDIR /jkl
 ARG GEMFILELOCK
