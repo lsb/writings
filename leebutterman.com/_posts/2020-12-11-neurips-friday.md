@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2020-12-11
-title: 2020 NeurIPS Friday and Saturday
+title: 2020 NeurIPS Friday
 ---
 
 # Brief notes
