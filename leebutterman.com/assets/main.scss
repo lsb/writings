@@ -87,7 +87,15 @@ $on-laptop:        800px !default;
 //  src: url(/assets/roboto-thin-italic.ttf) format('truetype');
 //}
 
+@font-face {
+  font-family: 'GFSPorsonRegular';
+  src: url('/assets/GFSPorsonRegular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 h1,h2,h3 { font-family: 'Roboto Thin'; }
+.porson { font: 24px/24px 'GFSPorsonRegular'; }
 
 // thank you rowan merewood for naughty-no-alt.glitch.me via https://twitter.com/rowan_m/status/1223935532763361281
 img:not([alt]) {

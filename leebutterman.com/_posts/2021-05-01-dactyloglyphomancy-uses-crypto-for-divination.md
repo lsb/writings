@@ -96,7 +96,7 @@ We can use older poetry as well. Sappho's "Some men say an army on horseback" is
 >
 > what you love.
 
-The original Greek for the last "it is what you love" is κῆν’ ὄττω τις ἔραται which we can interpolate into
+The original Greek for the last "it is what you love" is <span class=porson>κῆν’ ὄττω τις ἔραται</span> which we can interpolate into
 
 ```
 κῆν’ ὄττω ⛺ τις 🌘 ἔραται 🌄
